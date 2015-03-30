@@ -58,7 +58,6 @@ public class EqlService {
 				List<Format> formats = param.getFormat();
 				DataFormat.fmt(datas, formats);
 			}
-			
 			return datas;
 		}
 }
