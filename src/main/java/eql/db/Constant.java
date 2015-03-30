@@ -4,7 +4,7 @@ package eql.db;
  * Created by zhangdekun on 15-3-30-下午4:35.
  */
 public final class Constant {
-    public  static final String[] DB_TABLE_TYPES = { "TABLE" };
+    public static final String[] DB_TABLE_TYPES = {"TABLE"};
     public static final String COLUMN_NAME_TABLE_NAME = "TABLE_NAME";
     public static final String SHOW_TABLES = "show tables";
     public static final String SQLSERVER_TABLES = "select name from sysobjects where xtype='U'";

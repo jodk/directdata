@@ -1,33 +1,34 @@
 package eql.model;
 
-public class Sort extends Index{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Sort extends Index {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	private Integer sort;
+    private Integer sort;
 
-	private Integer agt ;
-	public static final int DESC = 0;
-	public static final  int ASC = 1;
-	public Integer getSort() {
-		return sort;
-	}
+    private Integer agt;
+    public static final int DESC = 0;
+    public static final int ASC = 1;
 
-	public String getBy(int sort){
-		return sort==DESC?"desc":"asc";
-	}
+    public Integer getSort() {
+        return sort;
+    }
 
-	public Integer getAgt() {
-		return agt;
-	}
+    public String getBy(int sort) {
+        return sort == DESC ? "desc" : "asc";
+    }
 
-	public void setAgt(Integer agt) {
-		this.agt = agt;
-	}
+    public Integer getAgt() {
+        return agt;
+    }
 
-	public void setSort(Integer sort) {
-		this.sort = sort;
-	}
+    public void setAgt(Integer agt) {
+        this.agt = agt;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
 }
