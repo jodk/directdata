@@ -12,7 +12,8 @@ public class HiveDbService extends AbstractDbService {
 	private final DB db;
 
 	public HiveDbService(DB db) {
-		this.db = db;
+		super(db.getVendor(),db.getDriverClass());
+        this.db = db;
 	}
 
 	@Override
@@ -31,7 +32,7 @@ public class HiveDbService extends AbstractDbService {
 	}
 	public static void main(String[] args) {
 		DB db = new DB();
-		db.setDriverClass(DB.HIVE2_DRIVER);
+		db.setDriverClass(Vendor.HIVE2_DRIVER);
 //		db.setUrl("jdbc:hive2://k1222.mzhen.cn:10000");
 		db.setUrl("jdbc:hive2://d114.mzhen.cn:10000/test");
 		db.setUsername("hive");
@@ -57,7 +58,7 @@ public class HiveDbService extends AbstractDbService {
 	}
 	public static void test(){
 		try {
-			Class.forName(DB.HIVE2_DRIVER);
+			Class.forName(Vendor.HIVE2_DRIVER);
 			Connection con = DriverManager.getConnection("jdbc:hive2://d114.mzhen.cn:10000/test", "hive","hive");
 //			System.out.println(con.getSchema());
 			DatabaseMetaData meta = con.getMetaData();

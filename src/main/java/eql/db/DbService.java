@@ -1,6 +1,8 @@
 package eql.db;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface DbService {
 
@@ -57,4 +59,13 @@ public interface DbService {
 	 * @return
 	 */
 	public boolean test(String url, String username, String password);
+
+    /**
+     * 注册其它的驱动服务
+     * @param vendor
+     * @param driver
+     */
+    public void register(String vendor,String driver);
+
+    public static final Map<String,DbService> dbServiceMap = new HashMap<>();
 }

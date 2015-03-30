@@ -13,19 +13,15 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import static eql.db.Constant.*;
+
 
 public abstract class AbstractDbService implements DbService {
 
 	public static final Logger logger = Logger.getLogger(AbstractDbService.class);
-	private static final String[] DB_TABLE_TYPES = { "TABLE" };
-	private static final String COLUMN_NAME_TABLE_NAME = "TABLE_NAME";
-	private static final String SHOW_TABLES = "show tables";
-	private static final String SQLSERVER_TABLES = "select name from sysobjects where xtype='U'";
-	private static final String COLUMN_NAME_COLUMN_NAME = "COLUMN_NAME";
-	private static final String COLUMN_NAME_TYPE_NAME = "TYPE_NAME";
-
-	private static final String ORACLE_TABLES = "select object_name as TABLE_NAME from user_objects where object_type='TABLE'";
-
+    public AbstractDbService(String vendor,String driver){
+        this.register(vendor,driver);
+    }
 	@Override
 	public List<String> tablesName() {
 		ResultSet rs = null;
@@ -356,7 +352,13 @@ public abstract class AbstractDbService implements DbService {
 		}
 	}
 
-	private boolean isMysql() {
+    @Override
+    public void register(String vendor, String driver) {
+        DbService.dbServiceMap.put(vendor,this);
+        Vendor.vendorMap.put(vendor,driver);
+    }
+
+    private boolean isMysql() {
 		return Vendor.MYSQL.equals(getVendor());
 	}
 

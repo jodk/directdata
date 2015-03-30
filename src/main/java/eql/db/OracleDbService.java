@@ -9,7 +9,8 @@ public class OracleDbService extends AbstractDbService {
 	private final DB db;
 
 	public OracleDbService(DB db) {
-		this.db = db;
+		super(db.getVendor(),db.getDriverClass());
+        this.db = db;
 	}
 
 	@Override
@@ -27,7 +28,7 @@ public class OracleDbService extends AbstractDbService {
 	}
 	public static void main(String[] args) {
 		DB db = new DB();
-		db.setDriverClass(DB.ORACLE_DRIVER);
+		db.setDriverClass(Vendor.ORACLE_DRIVER);
 		db.setUrl("jdbc:oracle:thin:@//10.100.1.200:1521/workdb");
 		db.setUsername("tjwork");
 		db.setPassword("tjwork");

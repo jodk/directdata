@@ -9,6 +9,7 @@ public class SqlServerDbService extends AbstractDbService {
 	private final DB db;
 
 	public SqlServerDbService(DB db) {
+        super(db.getVendor(),db.getDriverClass());
 		this.db = db;
 	}
 
@@ -27,7 +28,7 @@ public class SqlServerDbService extends AbstractDbService {
 	}
 	public static void main(String[] args) {
 		DB db = new DB();
-		db.setDriverClass(DB.SQLSERVER_DRIVER);
+		db.setDriverClass(Vendor.SQLSERVER_DRIVER);
 		db.setUrl("jdbc:sqlserver://192.168.1.154:1434;DatabaseName=MB_MrColaDemo");
 		db.setUsername("sa");
 		db.setPassword("Mingboard1234");

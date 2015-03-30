@@ -30,20 +30,15 @@ public class DbFactory {
 		}
 	}
 
+
 	public static DbService getDbService(DB db) throws Exception {
-		if (Vendor.MYSQL.equals(db.getVendor())) {
-			return new MysqlDbService(db);
-		} else if (Vendor.ORACLE.equals(db.getVendor())) {
-			return new OracleDbService(db);
-		} else if (Vendor.HIVE.equals(db.getVendor()) || Vendor.HIVE2.equals(db.getVendor())) {
-			return new HiveDbService(db);
-		} else if (Vendor.SQLSERVER.equals(db.getVendor())) {
-			return new SqlServerDbService(db);
-		} else if (Vendor.KYLIN.equals(db.getVendor())) {
-			return new KylinDbService(db);
-		} else {
-			throw new Exception("this db's type is not supported.");
-		}
+
+        DbService dbs = DbService.dbServiceMap.get(db.getVendor());
+        if(dbs !=null){
+            return dbs;
+        }else {
+            throw new Exception("this db's type is not supported.");
+        }
 	}
 
 	private static DbPool getAPool(DB db) {

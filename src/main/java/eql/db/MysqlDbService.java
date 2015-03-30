@@ -9,6 +9,7 @@ public class MysqlDbService extends AbstractDbService {
 	private final DB db;
 
 	public MysqlDbService(DB db) {
+        super(db.getVendor(),db.getDriverClass());
 		this.db = db;
 	}
 
@@ -29,7 +30,7 @@ public class MysqlDbService extends AbstractDbService {
 
 	public static void main(String[] args) throws Exception {
 		DB db = new DB();
-		db.setDriverClass(DB.MYSQL_DRIVER);
+		db.setDriverClass(Vendor.MYSQL_DRIVER);
 		db.setUrl("jdbc:mysql://192.168.1.89:3306/ums?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull");
 		db.setUsername("root");
 		db.setPassword("root");

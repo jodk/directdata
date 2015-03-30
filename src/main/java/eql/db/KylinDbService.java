@@ -9,7 +9,8 @@ public class KylinDbService extends AbstractDbService {
 	private final DB db;
 
 	public KylinDbService(DB db) {
-		this.db = db;
+		super(db.getVendor(),db.getDriverClass());
+        this.db = db;
 	}
 
 	@Override
@@ -29,7 +30,7 @@ public class KylinDbService extends AbstractDbService {
 
 	public static void main(String[] args) throws Exception {
 		DB db = new DB();
-		db.setDriverClass(DB.KYLIN_DRIVER);
+		db.setDriverClass(Vendor.KYLIN_DRIVER);
 		db.setUrl("jdbc:kylin://10.100.5.124:7070/default");
 		db.setUsername("ADMIN");
 		db.setPassword("KYLIN");
