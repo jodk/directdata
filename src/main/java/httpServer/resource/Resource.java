@@ -29,6 +29,11 @@ public final class Resource {
     public static final Map<String, Method> resourceMethodMap = new HashMap<String, Method>();
 
     /**
+     * 统一资源定位
+     * method的uri对应的class
+     */
+    public static final  Map<String,Class<?>> resourceMethodInClassMap = new HashMap<String, Class<?>>();
+    /**
      * 初始化部分资源
      */
     public static void init() {
@@ -74,6 +79,8 @@ public final class Resource {
                     if (resourceMethodMap.containsKey(methodUri)) {
                         log.warn("uri:" + methodUri + " has exist,ignore this resource:" + method.getName());
                     } else {
+                        resourceMethodMap.put(methodUri,method);
+                        resourceMethodInClassMap.put(methodUri,resourceClassMap.get(uri));
                         log.info("Map{" + methodUri + "=" + method.getName() + "}");
                     }
                 }
