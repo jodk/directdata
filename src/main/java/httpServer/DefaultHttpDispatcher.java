@@ -12,7 +12,7 @@ public class DefaultHttpDispatcher implements HttpDispatcher {
     }
 
     @Override
-    public void dispatch(HttpContext content) {
-
+    public void dispatch(HttpContext context) {
+        this.httpHandler = new DefaultHttpHandler(context.getHttpRequest().getUri());
     }
 }

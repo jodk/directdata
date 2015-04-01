@@ -1,4 +1,4 @@
-package httpServer;
+package httpServer.config;
 
 import org.apache.log4j.Logger;
 
@@ -16,19 +16,20 @@ public class Config {
         try {
             pro.load(Config.class.getClassLoader().getResourceAsStream(name));
         } catch (Exception e) {
-            log.error("load config properties fail : "+e.getMessage());
+            log.error("load config properties fail : " + e.getMessage());
         }
     }
 
-    public static int httpServerPort(){
-        int port =8080;
+    public static int httpServerPort() {
+        int port = 8080;
         try {
-            port = Integer.parseInt(pro.getProperty("http.server.port","8080"));
-        }catch (Exception e){
-            log.error("get http server port fail:"+e.getMessage());
+            port = Integer.parseInt(pro.getProperty("http.server.port", "8080"));
+        } catch (Exception e) {
+            log.error("get http server port fail:" + e.getMessage());
         }
         return port;
     }
+
     public static void main(String[] args) {
         System.out.println(Config.httpServerPort());
     }

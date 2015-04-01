@@ -5,5 +5,6 @@ package httpServer;
  */
 public interface HttpDispatcher {
     public HttpHandler getHandler();
+
     public void dispatch(HttpContext content);
 }
