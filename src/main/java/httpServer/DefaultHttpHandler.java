@@ -16,17 +16,18 @@ public class DefaultHttpHandler implements HttpHandler {
     }
 
     @Override
-    public HttpResult handle() {
+    public HttpResult handle() throws RuntimeException {
         try {
             Method method = Resource.resourceMethodMap.get(uri);
             Class clz = Resource.resourceMethodInClassMap.get(uri);
+            HttpResult result = new HttpResult();
             if (null != method && null != clz) {
-                return (HttpResult) method.invoke(clz.newInstance(), null);
-            } else {
-                return new HttpResult();
+                Object obj = method.invoke(clz.newInstance(), null);
+                result.setData(obj);
             }
+            return result;
         } catch (Exception e) {
-            return new HttpResult();
+            throw new RuntimeException(e);
         }
     }
 }

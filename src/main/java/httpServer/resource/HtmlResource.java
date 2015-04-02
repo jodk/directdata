@@ -1,6 +1,5 @@
 package httpServer.resource;
 
-import httpServer.HttpResult;
 import httpServer.resource.annotation.ResourceMethod;
 import httpServer.resource.annotation.ResourceUri;
 
@@ -11,7 +10,8 @@ import httpServer.resource.annotation.ResourceUri;
 public class HtmlResource {
 
     @ResourceMethod("chart")
-    public HttpResult chart() {
-        return new HttpResult();
+    public Object chart() {
+
+        return "helloworld ,中文 welcome your visit...";
     }
 }

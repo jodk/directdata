@@ -28,13 +28,12 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
                 dispatcher.dispatch(context);
             } catch (Exception e) {
                 log.error("request dispatcher fail:" + e.getMessage());
-                //TODO return response
+                context.getHttpResponse().error(HttpResponseStatus.BAD_REQUEST);
                 return;
             }
             if (HttpHeaders.is100ContinueExpected(request)) {
-                FullHttpResponse response = new DefaultFullHttpResponse(
-                        HttpVersion.HTTP_1_1, HttpResponseStatus.CONTINUE);
-                ctx.write(response);
+                context.getHttpResponse().error(HttpResponseStatus.CONTINUE);
+                return;
             }
         }
         if (msg instanceof HttpContext) {
@@ -44,7 +43,7 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
                 try {
                     context.getBuffer().writeBytes(content);
                 } catch (Exception e) {
-                    //TODO
+                    context.getHttpResponse().error(HttpResponseStatus.BAD_REQUEST);
                     return;
                 }
             }
@@ -54,14 +53,24 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
         if (msg instanceof LastHttpContent) {
             try {
                 HttpResult result = dispatcher.getHandler().handle();
-                //TODO
+                context.getHttpResponse().send(result.getData());
             } catch (Exception e) {
-                //TODO
+                context.getHttpResponse().error(HttpResponseStatus.INTERNAL_SERVER_ERROR);
                 return;
             } finally {
                 context.getBuffer().clear();
-                context.getHttpResponse().getBuffer().clear();
             }
         }
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        log.error(cause.getMessage());
+        ctx.close();
+    }
+
+    @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        ctx.flush();
     }
 }

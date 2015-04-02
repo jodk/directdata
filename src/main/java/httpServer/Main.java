@@ -19,7 +19,7 @@ public class Main {
         HttpServer server = new HttpServer(port);
         try {
             server.start();
-            log.info("http server(port:" + port + ") start ...");
+            log.info("http server listening on" + port + " start ...");
         } catch (Exception e) {
             log.error(e.getMessage());
         }

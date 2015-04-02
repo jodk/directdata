@@ -1,5 +1,6 @@
 package httpServer;
 
+import httpServer.resource.Resource;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.EventLoopGroup;
@@ -16,6 +17,7 @@ public class HttpServer {
 
     public HttpServer(int port) {
         this.port = port;
+        Resource.init();//init  resource
     }
 
     public void start() throws Exception {
