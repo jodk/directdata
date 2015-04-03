@@ -5,6 +5,9 @@ import httpServer.resource.annotation.ResourceUri;
 import org.apache.log4j.Logger;
 import utils.Finder;
 
+import javax.activation.MimetypesFileTypeMap;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,12 +35,16 @@ public final class Resource {
      * 统一资源定位
      * method的uri对应的class
      */
-    public static final  Map<String,Class<?>> resourceMethodInClassMap = new HashMap<String, Class<?>>();
+    public static final Map<String, Class<?>> resourceMethodInClassMap = new HashMap<String, Class<?>>();
+
+    public static MimetypesFileTypeMap mimeTypes = new MimetypesFileTypeMap();
+
     /**
      * 初始化部分资源
      */
     public static void init() {
         register(RESOURCE_PACKAGE);
+        mimeTypesResource();
     }
 
     /**
@@ -79,8 +86,8 @@ public final class Resource {
                     if (resourceMethodMap.containsKey(methodUri)) {
                         log.warn("uri:" + methodUri + " has exist,ignore this resource:" + method.getName());
                     } else {
-                        resourceMethodMap.put(methodUri,method);
-                        resourceMethodInClassMap.put(methodUri,resourceClassMap.get(uri));
+                        resourceMethodMap.put(methodUri, method);
+                        resourceMethodInClassMap.put(methodUri, resourceClassMap.get(uri));
                         log.info("Map{" + methodUri + "=" + method.getName() + "}");
                     }
                 }
@@ -92,6 +99,22 @@ public final class Resource {
         String uri = classUri + SEP + methodUri;
         uri = uri.replaceAll("\\" + SEP + "+", SEP);
         return uri;
+    }
+
+    private static void mimeTypesResource() {
+        InputStream is = null;
+        try {
+            is = Resource.class.getClassLoader().getResourceAsStream("mime.types");
+            mimeTypes = new MimetypesFileTypeMap(is);
+        } catch (Exception e) {
+            log.warn("Mime type from local file fail");
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static void main(String[] args) {

@@ -2,6 +2,7 @@ package httpServer;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
@@ -88,7 +89,7 @@ public class HttpResponse {
             if (content_type != null) {
                 setHeader(HttpHeaders.Names.CONTENT_TYPE, content_type);
             } else {
-                setHeader(HttpHeaders.Names.CONTENT_TYPE, "text/plain; charset=UTF-8");
+                setHeader(HttpHeaders.Names.CONTENT_TYPE, "application/octet-stream; charset=UTF-8");
             }
         }
         setHeader(HttpHeaders.Names.CONTENT_LENGTH, buffer.writerIndex());
