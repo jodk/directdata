@@ -110,6 +110,7 @@ public class HttpResponse {
 
     public void error(HttpResponseStatus status) {
         this.status = status;
+        this.send("");
     }
 
     private <T> void appendBody(T msg) {

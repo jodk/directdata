@@ -55,7 +55,7 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
                 HttpResult result = dispatcher.getHandler().handle();
                 context.getHttpResponse().send(result.getData());
             } catch (Exception e) {
-                context.getHttpResponse().error(HttpResponseStatus.INTERNAL_SERVER_ERROR);
+                context.getHttpResponse().error(HttpResponseStatus.NOT_FOUND);
                 return;
             } finally {
                context.getBuffer().clear();

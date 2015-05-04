@@ -13,10 +13,14 @@ import java.lang.reflect.Method;
 public class DefaultHttpHandler implements HttpHandler {
     private final HttpContext context;
     private final String path;
+    private final String name;
 
-    public DefaultHttpHandler(String path, HttpContext context) {
+    public DefaultHttpHandler(String path,String name, HttpContext context) {
         this.context = context;
         this.path = path;
+        this.name = name;
+        this.context.setPath(path);
+        this.context.setName(name);
     }
 
     @Override

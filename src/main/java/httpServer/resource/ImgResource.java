@@ -1,5 +1,6 @@
 package httpServer.resource;
 
+import httpServer.HttpContext;
 import httpServer.config.Config;
 import httpServer.resource.annotation.ResourceMethod;
 import httpServer.resource.annotation.ResourceUri;
@@ -16,7 +17,7 @@ import java.sql.Connection;
 /**
  * Created by zhangdekun on 15-4-1-下午3:08.
  */
-@ResourceUri("/img")
+@ResourceUri("/")
 public class ImgResource extends AbstractResource{
 
     public ImgResource(Object param) {
@@ -26,9 +27,10 @@ public class ImgResource extends AbstractResource{
     private static String getPath(String fileName){
         return Config.imgPosition()+File.separator+fileName;
     }
-    @ResourceMethod("/jpg")
+    @ResourceMethod("/img")
     public Object image() {
-        String path = getPath("img01.jpg");
+        HttpContext context = (HttpContext)super.getParam();
+        String path = getPath(context.getName());
         File localFile = new File(path);
         RandomAccessFile rf = null;
         try {
@@ -41,11 +43,9 @@ public class ImgResource extends AbstractResource{
             }
             return bbf;
         } catch (Exception e) {
-            e.printStackTrace();
             throw  new RuntimeException("load "+path+" error.");
         }
     }
-
     public static void main(String[] args) {
         MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
         String contentType = mimetypesFileTypeMap.getContentType("test.html");

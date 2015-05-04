@@ -10,13 +10,14 @@ import io.netty.handler.codec.http.HttpRequest;
 public class HttpContext {
     private HttpRequest httpRequest;
     private HttpResponse httpResponse;
+    private String path;
+    private String name;
 
+
+    private final ByteBuf buffer = Unpooled.buffer();
     public ByteBuf getBuffer() {
         return buffer;
     }
-
-    private final ByteBuf buffer = Unpooled.buffer();
-
     public HttpRequest getHttpRequest() {
         return httpRequest;
     }
@@ -36,5 +37,21 @@ public class HttpContext {
     public void initContent(HttpRequest request, HttpResponse reponse) {
         this.httpRequest = request;
         this.httpResponse = reponse;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
