@@ -11,7 +11,6 @@ public class Config {
     private static Logger log = Logger.getLogger(Config.class);
     private static final Properties pro = new Properties();
     private static final String name = "conf/config.properties";
-
     static {
         try {
             pro.load(Config.class.getClassLoader().getResourceAsStream(name));
@@ -19,7 +18,6 @@ public class Config {
             log.error("load config properties fail : " + e.getMessage());
         }
     }
-
     public static int httpServerPort() {
         int port = 8080;
         try {
@@ -29,8 +27,16 @@ public class Config {
         }
         return port;
     }
-
+    public static String imgPosition() {
+        try {
+            return pro.getProperty("position.img", "");
+        } catch (Exception e) {
+            log.error("get img position fail:" + e.getMessage());
+        }
+        return "";
+    }
     public static void main(String[] args) {
-        System.out.println(Config.httpServerPort());
+
+        System.out.println(Config.imgPosition());
     }
 }

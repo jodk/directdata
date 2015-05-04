@@ -58,7 +58,7 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
                 context.getHttpResponse().error(HttpResponseStatus.INTERNAL_SERVER_ERROR);
                 return;
             } finally {
-                context.getBuffer().clear();
+               context.getBuffer().clear();
             }
         }
     }

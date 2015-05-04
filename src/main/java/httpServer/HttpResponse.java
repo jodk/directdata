@@ -89,7 +89,7 @@ public class HttpResponse {
             if (content_type != null) {
                 setHeader(HttpHeaders.Names.CONTENT_TYPE, content_type);
             } else {
-                setHeader(HttpHeaders.Names.CONTENT_TYPE, "application/octet-stream; charset=UTF-8");
+                //setHeader(HttpHeaders.Names.CONTENT_TYPE, "application/octet-stream; charset=UTF-8");
             }
         }
         setHeader(HttpHeaders.Names.CONTENT_LENGTH, buffer.writerIndex());

@@ -4,6 +4,7 @@ package httpServer;
 import httpServer.resource.Resource;
 import io.netty.handler.codec.http.HttpContent;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 /**
@@ -25,7 +26,8 @@ public class DefaultHttpHandler implements HttpHandler {
             Class clz = Resource.resourceMethodInClassMap.get(path);
             HttpResult result = new HttpResult();
             if (null != method && null != clz) {
-                Object obj = method.invoke(clz.newInstance(), null);
+                Constructor constructor = clz.getConstructor(Object.class);
+                Object obj = method.invoke(constructor.newInstance(context), null);
                 result.setData(obj);
             }
             return result;
