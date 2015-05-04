@@ -35,6 +35,14 @@ public class Config {
         }
         return "";
     }
+    public static String htmlPosition() {
+        try {
+            return pro.getProperty("position.html", "");
+        } catch (Exception e) {
+            log.error("get html position fail:" + e.getMessage());
+        }
+        return "";
+    }
     public static void main(String[] args) {
 
         System.out.println(Config.imgPosition());
