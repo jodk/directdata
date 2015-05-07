@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>web chat</title>
+    <script type="text/javascript">
+var ws;
+function ToggleConnectionClicked() {
+try {
+ws = new WebSocket("ws://10.100.0.50:8088/websoket");//连接服务器
+ws.onopen = function(event){alert("已经与服务器建立了连接rn当前连接状态："+this.readyState);};
+ws.onmessage = function(event){document.getElementById("area").value = document.getElementById("area").value+"\n"+event.data;};
+ws.onclose = function(event){alert("已经与服务器断开连接rn当前连接状态："+this.readyState);};
+ws.onerror = function(event){alert("WebSocket异常！");};
+} catch (ex) {
+alert(ex.message);
+}
+};
+
+function SendData() {
+try{
+var msg = document.getElementById("message").value;
+
+ws.send(msg);
+}catch(ex){
+alert(ex.message);
+}
+};
+
+function seestate(){
+alert(ws.readyState);
+}
+</script>
+</head>
+<body>
+<button id='ToggleConnection' type="button" onclick='ToggleConnectionClicked();'>连接服务器</button><br /><br />
+<input id="message" type="text"></input>
+<button id='send' type="button" onclick='SendData();'>发送</button><br /><br />
+<textarea cols='30' rows='40' id="area"></textarea>
+</body>
+</html>

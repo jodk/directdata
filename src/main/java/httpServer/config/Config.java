@@ -27,6 +27,15 @@ public class Config {
         }
         return port;
     }
+    public static int websoketServerPort() {
+        int port = 8089;
+        try {
+            port = Integer.parseInt(pro.getProperty("websoket.server.port", "8089"));
+        } catch (Exception e) {
+            log.error("get websoket server port fail:" + e.getMessage());
+        }
+        return port;
+    }
     public static String imgPosition() {
         try {
             return pro.getProperty("position.img", "");
