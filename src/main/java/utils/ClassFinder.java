@@ -15,7 +15,7 @@ import java.util.jar.JarFile;
 /**
  * Created by zhangdekun on 15-4-1-下午12:48.
  */
-public class Finder {
+public class ClassFinder {
     /**
      * @return
      */
@@ -137,7 +137,7 @@ public class Finder {
     }
 
     public static void main(String[] args) {
-        Set<Class<?>> set = Finder.getClasses("eql.db");
+        Set<Class<?>> set = ClassFinder.getClasses("eql.db");
         for (Class clz : set) {
             System.out.println(clz.getName());
         }
