@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="directdata:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="eql.war">
+      <element id="artifact" artifact-name="directdata:war exploded" />
+    </root>
+  </artifact>
+</component>

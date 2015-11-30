@@ -1,0 +1,28 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="directdata:war exploded">
+    <output-path>$PROJECT_DIR$/target/eql</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="directdata" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.13" />
+          <element id="library" level="project" name="Maven: com.jolbox:bonecp-provider:0.7.1.RELEASE" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.5.10" />
+          <element id="library" level="project" name="Maven: com.jolbox:bonecp:0.7.1.RELEASE" />
+          <element id="library" level="project" name="Maven: com.google.guava:guava:r08" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.16" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.5.10" />
+          <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.5" />
+          <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.0" />
+          <element id="library" level="project" name="Maven: io.netty:netty-all:4.0.24.Final" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/eql/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="directdata/web/Web" />
+    </root>
+  </artifact>
+</component>
