@@ -28,27 +28,5 @@ public class OracleDbService extends AbstractDbService {
         return Vendor.ORACLE;
     }
 
-    public static void main(String[] args) {
-        DB db = new DB();
-        db.setDriverClass(Vendor.ORACLE_DRIVER);
-        db.setUrl("jdbc:oracle:thin:@//10.100.1.200:1521/workdb");
-        db.setUsername("tjwork");
-        db.setPassword("tjwork");
-//		db.setUrl("jdbc:oracle:thin:@d196.mzhen.cn:1521:orcl");
-//		db.setUsername("zdk");
-//		db.setPassword("123456");
-        DbService serv = new OracleDbService(db);
-        List<String> l = serv.tablesName();
-        if (l != null) {
-            for (String s : l) {
-                System.out.println(s);
-                DbTable t = serv.getDbTable(s);
-                if (t != null) {
-                    for (DbColumn c : t.getColumnList()) {
-                        System.out.println("type:" + c.getDbType() + "   name:" + c.getColumnName());
-                    }
-                }
-            }
-        }
-    }
+
 }
